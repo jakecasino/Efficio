@@ -67,7 +67,7 @@ extension UIView {
 					}, explanation: "Could not round corners based on \(value) because \(value) is less than zero.")
 				}
 				if let value = trait.value as? roundedCorners {
-					let radius: CGFloat = 0
+					var radius: CGFloat = 0
 					switch value {
 					case .width:
 						if view.frame.width > 0 {

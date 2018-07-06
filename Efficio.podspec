@@ -1,15 +1,7 @@
-#
-# Be sure to run `pod lib lint Efficio.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see https://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
   s.name             = 'Efficio'
   s.version          = '0.1.0'
-s.summary          = 'Efficio: to make more efficient.'
+  s.summary          = 'Efficio: to make more efficient.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -31,6 +23,7 @@ A framework that condenses and consolidates common tasks for iOS Development.
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'Efficio/Classes/**/*'
+  s.swift_version = '4.0'
   
   # s.resource_bundles = {
   #   'Efficio' => ['Efficio/Assets/*.png']

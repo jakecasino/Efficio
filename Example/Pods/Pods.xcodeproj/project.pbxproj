@@ -8,11 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		043587A47C9600B93D8ACE281E697DC5 /* Efficio-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8C89D1D5473FEE56EDD983793CD200 /* Efficio-dummy.m */; };
+		0B93313520EF02F8007B44DF /* Error Handling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B93313120EF02F7007B44DF /* Error Handling.swift */; };
+		0B93313620EF02F8007B44DF /* View Frames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B93313220EF02F7007B44DF /* View Frames.swift */; };
+		0B93313720EF02F8007B44DF /* Traits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B93313320EF02F7007B44DF /* Traits.swift */; };
+		0B93313820EF02F8007B44DF /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B93313420EF02F7007B44DF /* Colors.swift */; };
 		15222F52EF506760F9AE9AD7461FC810 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 		564B9BACBC35C8A4A9546AC1C9714213 /* Pods-Efficio_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F250F422ABD760F40FF7506B35C0733F /* Pods-Efficio_Tests-dummy.m */; };
 		6EF8DD27298869E6173FEFDC3DD87C25 /* Efficio-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 314CFCB46075311195B8377BAC76721D /* Efficio-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7849098182BA99A55853166933753B4D /* Pods-Efficio_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A1095D8931870B7A4B97AEFF6B5DF354 /* Pods-Efficio_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8259C9A7C23AAB30FEE2C44217186ED5 /* ReplaceMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA107F72C75BD2AC223E433D36EC1A8 /* ReplaceMe.swift */; };
 		E5F83D6172EBC7D687D62D8158CB84BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,10 +33,13 @@
 		003C74B466EAC40AF5BE74F9CD0C5710 /* Efficio.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = Efficio.podspec; sourceTree = "<group>"; };
 		010A9687870651BFD0D9D08DA0AEB14C /* Pods-Efficio_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Efficio_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		0AA6A28A0480072335404C1A8F20A810 /* Pods-Efficio_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Efficio_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		0B93313120EF02F7007B44DF /* Error Handling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Error Handling.swift"; path = "Efficio/Classes/Error Handling.swift"; sourceTree = "<group>"; };
+		0B93313220EF02F7007B44DF /* View Frames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "View Frames.swift"; path = "Efficio/Classes/View Frames.swift"; sourceTree = "<group>"; };
+		0B93313320EF02F7007B44DF /* Traits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Traits.swift; path = Efficio/Classes/Traits.swift; sourceTree = "<group>"; };
+		0B93313420EF02F7007B44DF /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Colors.swift; path = Efficio/Classes/Colors.swift; sourceTree = "<group>"; };
 		1D88BF77DD16A20B4EA76978463478D8 /* Pods-Efficio_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Efficio_Tests-resources.sh"; sourceTree = "<group>"; };
 		234B31F094C1A826ED61546106475B3C /* Efficio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Efficio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		314CFCB46075311195B8377BAC76721D /* Efficio-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Efficio-umbrella.h"; sourceTree = "<group>"; };
-		3FA107F72C75BD2AC223E433D36EC1A8 /* ReplaceMe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReplaceMe.swift; path = Efficio/Classes/ReplaceMe.swift; sourceTree = "<group>"; };
 		499E2DB442239E407B0D107881CD5B64 /* Efficio.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Efficio.modulemap; sourceTree = "<group>"; };
 		5E2142B97FB237C9CC38FE739074ED6A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6181AF619BD02144F1822FE7E6F450B4 /* Pods-Efficio_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Efficio_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -84,7 +90,10 @@
 		0FD49B04EAD64FA6149B98B00176DF47 /* Efficio */ = {
 			isa = PBXGroup;
 			children = (
-				3FA107F72C75BD2AC223E433D36EC1A8 /* ReplaceMe.swift */,
+				0B93313420EF02F7007B44DF /* Colors.swift */,
+				0B93313120EF02F7007B44DF /* Error Handling.swift */,
+				0B93313320EF02F7007B44DF /* Traits.swift */,
+				0B93313220EF02F7007B44DF /* View Frames.swift */,
 				5E0F32B5D7F6500057DB054A413E8866 /* Pod */,
 				B01611EBDC1B77FBB2CDFC2CFCEE7312 /* Support Files */,
 			);
@@ -243,6 +252,11 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 0930;
+				TargetAttributes = {
+					B12E6F02B882B7C30648B83E0C5FBF86 = {
+						LastSwiftMigration = 1000;
+					};
+				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -276,7 +290,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				043587A47C9600B93D8ACE281E697DC5 /* Efficio-dummy.m in Sources */,
-				8259C9A7C23AAB30FEE2C44217186ED5 /* ReplaceMe.swift in Sources */,
+				0B93313820EF02F8007B44DF /* Colors.swift in Sources */,
+				0B93313620EF02F8007B44DF /* View Frames.swift in Sources */,
+				0B93313720EF02F8007B44DF /* Traits.swift in Sources */,
+				0B93313520EF02F8007B44DF /* Error Handling.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,7 +334,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -384,7 +401,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";

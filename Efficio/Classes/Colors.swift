@@ -80,7 +80,7 @@ extension UIColor {
 extension UIColor {
 	fileprivate struct RGBColor { static var maxValue: CGFloat = 255 }
 	
-	fileprivate func from(RGB values: [CGFloat]) -> UIColor {
+	public func from(RGB values: [CGFloat]) -> UIColor {
 		func checkForErrorsInRGBComponents() {
 			for value in values {
 				Error(regarding: value, if: { () -> (Bool) in

@@ -78,13 +78,16 @@ extension UIColor {
 
 // RGB Conversion Library
 extension UIColor {
-	fileprivate struct RGBColor { static var maxValue: CGFloat = 255 }
+	struct RGBColor {
+		static var minValue: CGFloat = 0
+		static var maxValue: CGFloat = 255
+	}
 	
 	public func from(RGB values: [CGFloat]) -> UIColor {
 		func checkForErrorsInRGBComponents() {
 			for value in values {
 				Error(regarding: value, if: { () -> (Bool) in
-					(value < 0) || (value > 255)
+					(value < RGBColor.minValue) || (value > RGBColor.maxValue)
 				}, explanation: "Value is out of the RGB range.")
 			}
 			

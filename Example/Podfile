@@ -1,0 +1,6 @@
+use_frameworks!
+target 'Efficio_Tests' do
+  pod 'Efficio', :path => '../'
+  
+  
+end

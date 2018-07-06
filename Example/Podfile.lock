@@ -1,0 +1,16 @@
+PODS:
+  - Efficio (0.1.0)
+
+DEPENDENCIES:
+  - Efficio (from `../`)
+
+EXTERNAL SOURCES:
+  Efficio:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Efficio: fa4d3bae3fdffd94418875bca139b13bf7f44fc6
+
+PODFILE CHECKSUM: c6cb3b6ad04c885014131c5925d4db122217eadc
+
+COCOAPODS: 1.5.3

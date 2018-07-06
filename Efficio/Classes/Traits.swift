@@ -17,6 +17,12 @@ extension UIView {
 		case cornerRadius
 		case masksToBounds
 		case opacity
+		case roundedCorners
+	}
+	
+	public enum roundedCorners {
+		case width
+		case height
 	}
 	
 	public func style(_ view: UIView,_ traits: [traits: Any]) {
@@ -49,22 +55,48 @@ extension UIView {
 		
 		for trait in traits {
 			switch trait.key {
+			
 			case .backgroundColor:
 				if let color = trait.value as? UIColor {
 					view.backgroundColor = color
 				} else { ErrorFor(trait.key) }
+			
 			case .cornerRadius:
-				if let value = trait.value as? CGFloat {
+				func ErrorFor(_ value: roundedCorners) {
+					Error(regarding: view, if: { () -> (Bool) in
+						true
+					}, explanation: "Could not round corners based on \(value) because \(value) is less than zero.")
+				}
+				if let value = trait.value as? roundedCorners {
+					let radius: CGFloat
+					switch value {
+					case .width:
+						if view.frame.width > 0 {
+							radius = view.frame.width
+						} else { ErrorFor(value) }
+						break
+					case .height:
+						if view.frame.height > 0 {
+							radius = view.frame.height
+						} else { ErrorFor(value) }
+						break
+					}
+					view.layer.cornerRadius = radius
+				} else if let value = trait.value as? (() -> (CGFloat)) {
+					view.layer.cornerRadius = value
+				} else if let value = trait.value as? CGFloat {
 					view.layer.cornerRadius = value
 				} else if let value = trait.value as? Int {
 					view.layer.cornerRadius = CGFloat(value)
 				} else { ErrorFor(trait.key) }
+			
 			case .masksToBounds:
 				if let value = trait.value as? Bool {
 					view.layer.masksToBounds = value
 				} else {
 					ErrorFor(trait.key)
 				}
+			
 			case .opacity:
 				if let value = trait.value as? Double {
 					view.alpha = CGFloat(value)

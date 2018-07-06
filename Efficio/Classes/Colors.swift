@@ -78,7 +78,7 @@ extension UIColor {
 
 // RGB Conversion Library
 extension UIColor {
-	struct RGBColor {
+	public struct RGBColor {
 		static var minValue: CGFloat = 0
 		static var maxValue: CGFloat = 255
 	}

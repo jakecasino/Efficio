@@ -5,7 +5,7 @@
 //  Created by Jake Casino on 7/3/18.
 //
 
-protocol ErrorHandling { }
+public protocol ErrorHandling { }
 extension ErrorHandling {
 	public func Error(regarding item: Any, if problematicSituationOccurs: () -> (Bool), explanation: String) {
 		if problematicSituationOccurs() {

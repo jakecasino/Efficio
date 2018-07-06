@@ -54,7 +54,7 @@ extension UIView {
 					view.backgroundColor = color
 				} else { ErrorFor(trait.key) }
 			case .cornerRadius:
-				if else value = trait.value as? CGFloat {
+				if let value = trait.value as? CGFloat {
 					view.layer.cornerRadius = value
 				} else if let value = trait.value as? Int {
 					view.layer.cornerRadius = CGFloat(value)

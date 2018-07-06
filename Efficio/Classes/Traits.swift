@@ -17,7 +17,6 @@ extension UIView {
 		case cornerRadius
 		case masksToBounds
 		case opacity
-		case roundedCorners
 	}
 	
 	public enum roundedCorners {
@@ -83,7 +82,7 @@ extension UIView {
 					}
 					view.layer.cornerRadius = radius
 				} else if let value = trait.value as? (() -> (CGFloat)) {
-					view.layer.cornerRadius = value
+					view.layer.cornerRadius = value()
 				} else if let value = trait.value as? CGFloat {
 					view.layer.cornerRadius = value
 				} else if let value = trait.value as? Int {

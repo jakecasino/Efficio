@@ -10,6 +10,7 @@ import UIKit
 
 // UIColor Standard Colors Library
 extension UIColor {
+	public static var whiteF8: UIColor { return UIColor().from(RGB: [248, 248, 248]) }
 	public static var whiteF2: UIColor { return UIColor().from(RGB: [242, 242, 242]) }
 	public static var whiteE: UIColor { return UIColor().from(RGB: [238, 238, 238]) }
 	public static var whiteD: UIColor { return UIColor().from(RGB: [221, 221, 221]) }

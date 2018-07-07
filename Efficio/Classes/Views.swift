@@ -152,6 +152,39 @@ public enum boundingAreas {
 	case heightMinusPadding
 }
 
+extension CGSize {
+	public static var aspect: CGSize { return CGSize() }
+	public enum aspectRatios {
+		case standard
+		case wide
+		case square
+		case tall
+	}
+	public func height(_ aspectRatio: aspectRatios, fromWidth value: CGFloat) -> CGFloat {
+		let width: CGFloat
+		let height: CGFloat
+		switch aspectRatio {
+		case .standard:
+			width = 4
+			height = 3
+			break
+		case .wide:
+			width = 16
+			height = 9
+			break
+		case .square:
+			width = 1
+			height = 1
+			break
+		case .tall:
+			width = 7
+			height = 5
+			break
+		}
+		return (value * height) / width
+	}
+}
+
 extension UIView {
 	public func resize(width: Any?, height: Any?) {
 		resizer(width: width, height: height, considersSafeAreaFrom: nil)

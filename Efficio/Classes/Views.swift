@@ -41,7 +41,7 @@ public enum origins {
 
 extension UIView {
 	private static var associationKey_padding: UInt8 = 0
-	private var paddingInsets: UIEdgeInsets? {
+	public var paddingInsets: UIEdgeInsets? {
 		get {
 			return objc_getAssociatedObject(self, &UIView.associationKey_padding) as? UIEdgeInsets
 		}

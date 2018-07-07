@@ -265,11 +265,11 @@ public struct padding {
 }
 
 extension UIView {
-	public func padding(allAround value: CGFloat) {
+	public func addPadding(allAround value: CGFloat) {
 		paddingInsets = UIEdgeInsets(top: value, left: value, bottom: value, right: value)
 	}
 	
-	public func padding(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) {
+	public func addPadding(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) {
 		paddingInsets = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
 	}
 	

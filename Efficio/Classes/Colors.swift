@@ -8,9 +8,6 @@
 
 import UIKit
 
-// Add ErrorHandling Protocol
-extension UIColor: ErrorHandling { }
-
 // UIColor Standard Colors Library
 extension UIColor {
 	public static var whiteF2: UIColor { return UIColor().from(RGB: [242, 242, 242]) }
@@ -87,12 +84,12 @@ extension UIColor {
 	public func from(RGB values: [CGFloat]) -> UIColor {
 		func checkForErrorsInRGBComponents() {
 			for value in values {
-				Error(regarding: value, if: { () -> (Bool) in
+				Error(for: value, if: { () -> (Bool) in
 					(value < RGBColor.minValue) || (value > RGBColor.maxValue)
 				}, explanation: "Value is out of the RGB range.")
 			}
 			
-			Error(regarding: values, if: { () -> (Bool) in
+			Error(for: values, if: { () -> (Bool) in
 				values.count > 3
 			}, explanation: "More than 3 values when initializing. Only first three values will be used.")
 		}

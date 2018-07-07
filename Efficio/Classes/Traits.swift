@@ -8,25 +8,26 @@
 
 import UIKit
 
-// Add Error Handling Protocol
-extension UIView: ErrorHandling { }
+public enum corners {
+	case extraSmall
+	case small
+	case medium
+	case large
+	case extraLarge
+	case roundByWidth
+	case roundByHeight
+}
 
-// Traits Library
 extension UIView {
-	public enum traits {
+	public enum Traits {
 		case backgroundColor
-		case cornerRadius
-		case masksToBounds
+		case corners
+		case maskContent
 		case opacity
 	}
 	
-	public enum roundedCorners {
-		case width
-		case height
-	}
-	
-	public func style(_ view: UIView,_ traits: [traits: Any]) {
-		func ErrorFor(_ TRAIT: traits) {
+	public func style(_ view: UIView,_ traits: [Traits: Any]) {
+		func error(for TRAIT: Traits) {
 			let trait: String
 			let expectedType: String
 			
@@ -35,11 +36,11 @@ extension UIView {
 				trait = "background color"
 				expectedType = "UIColor"
 				break
-			case .cornerRadius:
+			case .corners:
 				trait = "corner radius"
 				expectedType = "Int"
 				break
-			case .masksToBounds:
+			case .maskContent:
 				trait = "mask"
 				expectedType = "Bool"
 			case .opacity:
@@ -47,63 +48,107 @@ extension UIView {
 				expectedType = "CGFloat"
 			}
 			
-			let errorMessage = "Could not set \(trait) because provided value was not of type \(expectedType)."
-			Error(regarding: view, if: { () -> (Bool) in
-				true
-			}, explanation: errorMessage)
+			Error(for: view, if: { () -> (Bool) in true }, explanation: "Could not set \(trait) because provided value was not of type \(expectedType).")
 		}
 		
 		for trait in traits {
 			switch trait.key {
-			
+				
 			case .backgroundColor:
-				if let color = trait.value as? UIColor {
-					view.backgroundColor = color
-				} else { ErrorFor(trait.key) }
-			
-			case .cornerRadius:
-				func ErrorFor(_ value: roundedCorners) {
-					Error(regarding: view, if: { () -> (Bool) in
-						true
-					}, explanation: "Could not round corners based on \(value) because \(value) is less than zero.")
+				guard let color = (trait.value as? UIColor) else { error(for: trait.key); break }
+				view.backgroundColor = color
+				
+			case .corners:
+				func error(for value: corners) {
+					Error(for: view, if: { () -> (Bool) in true }, explanation: "Corners could not \(value) because value was less than zero.")
 				}
-				if let value = trait.value as? roundedCorners {
-					var radius: CGFloat = 0
+				if let value = trait.value as? corners {
 					switch value {
-					case .width:
-						if view.frame.width > 0 {
-							radius = view.frame.width
-						} else { ErrorFor(value) }
+					case .extraSmall:
+						view.layer.cornerRadius = 2
 						break
-					case .height:
-						if view.frame.height > 0 {
-							radius = view.frame.height
-						} else { ErrorFor(value) }
+					case .small:
+						view.layer.cornerRadius = 4
+						break
+					case .medium:
+						view.layer.cornerRadius = 8
+						break
+					case .large:
+						view.layer.cornerRadius = 12
+						break
+					case .extraLarge:
+						view.layer.cornerRadius = 18
+						break
+					case .roundByWidth:
+						guard view.frame.width > 0 else { error(for: value); break }
+						view.layer.cornerRadius = (view.bounds.width / 2)
+						break
+					case .roundByHeight:
+						guard view.frame.height > 0 else { error(for: value); break }
+						view.layer.cornerRadius = (view.bounds.height / 2)
 						break
 					}
-					view.layer.cornerRadius = radius
-				} else if let value = trait.value as? (() -> (CGFloat)) {
-					view.layer.cornerRadius = value()
-				} else if let value = trait.value as? CGFloat {
-					view.layer.cornerRadius = value
-				} else if let value = trait.value as? Int {
-					view.layer.cornerRadius = CGFloat(value)
-				} else { ErrorFor(trait.key) }
-			
-			case .masksToBounds:
-				if let value = trait.value as? Bool {
-					view.layer.masksToBounds = value
-				} else {
-					ErrorFor(trait.key)
 				}
-			
+				
+				else if let value = trait.value as? CGFloat { view.layer.cornerRadius = value }
+				else if let value = trait.value as? Double { view.layer.cornerRadius = CGFloat(value) }
+				else if let value = trait.value as? Int { view.layer.cornerRadius = CGFloat(value) }
+				else { error(for: trait.key) }
+				
+			case .maskContent:
+				guard let value = (trait.value as? Bool) else { error(for: trait.key); break }
+				view.layer.masksToBounds = value
+				
 			case .opacity:
-				if let value = trait.value as? Double {
-					view.alpha = CGFloat(value)
-				} else {
-					ErrorFor(trait.key)
-				}
+				guard let value = (trait.value as? Double) else { error(for: trait.key); break }
+				view.alpha = CGFloat(value)
 			}
+		}
+	}
+}
+
+extension UIViewController {
+	private static var traitsApplicator: UIView { return UIView() }
+	public func style(_ view: UIView,_ traits: [UIView.Traits: Any]) {
+		UIViewController.traitsApplicator.style(view, traits)
+	}
+}
+
+extension UIView {
+	private static var associationKey_shadow: UInt8 = 1
+	private var shadow: Shadow? {
+		get {
+			return objc_getAssociatedObject(self, &UIView.associationKey_shadow) as? Shadow
+		}
+		set(newValue) {
+			objc_setAssociatedObject(self, &UIView.associationKey_shadow, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+		}
+	}
+	public func dropShadow(opacity: Float, x: CGFloat, y: CGFloat, spread: CGFloat) {
+		guard let superview = superview else {
+			Error(for: self, if: { () -> (Bool) in true }, explanation: "Could not resize view because there was no reference to a superview.")
+			return
+		}
+		
+		shadow = Shadow(linkTo: self, addTo: superview, opacity: opacity, x: x, y: y, spread: spread)
+		shadow!.layer.cornerRadius = layer.cornerRadius
+	}
+	
+	func updateShadowFrame() {
+		if let shadow = shadow { shadow.matchFrame(to: self) }
+	}
+	
+	private class Shadow: UIView {
+		fileprivate convenience init(linkTo linkedView: UIView, addTo superview: UIView, opacity: Float, x: CGFloat, y: CGFloat, spread: CGFloat) {
+			self.init(frame: CGRect.zero)
+			superview.insertSubview(self, belowSubview: linkedView)
+			matchFrame(to: linkedView)
+			
+			style(self, [.backgroundColor: UIColor.white, .maskContent: false])
+			layer.shadowColor = UIColor.black.cgColor
+			layer.shadowRadius = spread
+			layer.shadowOffset = CGSize(width: x, height: y)
+			layer.shadowOpacity = opacity
 		}
 	}
 }

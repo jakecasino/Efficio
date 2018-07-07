@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		043587A47C9600B93D8ACE281E697DC5 /* Efficio-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8C89D1D5473FEE56EDD983793CD200 /* Efficio-dummy.m */; };
 		0B93313520EF02F8007B44DF /* Error Handling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B93313120EF02F7007B44DF /* Error Handling.swift */; };
-		0B93313620EF02F8007B44DF /* View Frames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B93313220EF02F7007B44DF /* View Frames.swift */; };
+		0B93313620EF02F8007B44DF /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B93313220EF02F7007B44DF /* Views.swift */; };
 		0B93313720EF02F8007B44DF /* Traits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B93313320EF02F7007B44DF /* Traits.swift */; };
 		0B93313820EF02F8007B44DF /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B93313420EF02F7007B44DF /* Colors.swift */; };
+		0B98E26720F04A8A00534C93 /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B98E26620F04A8A00534C93 /* Actions.swift */; };
 		15222F52EF506760F9AE9AD7461FC810 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 		564B9BACBC35C8A4A9546AC1C9714213 /* Pods-Efficio_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F250F422ABD760F40FF7506B35C0733F /* Pods-Efficio_Tests-dummy.m */; };
 		6EF8DD27298869E6173FEFDC3DD87C25 /* Efficio-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 314CFCB46075311195B8377BAC76721D /* Efficio-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -34,9 +35,10 @@
 		010A9687870651BFD0D9D08DA0AEB14C /* Pods-Efficio_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Efficio_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		0AA6A28A0480072335404C1A8F20A810 /* Pods-Efficio_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Efficio_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		0B93313120EF02F7007B44DF /* Error Handling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Error Handling.swift"; path = "Efficio/Classes/Error Handling.swift"; sourceTree = "<group>"; };
-		0B93313220EF02F7007B44DF /* View Frames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "View Frames.swift"; path = "Efficio/Classes/View Frames.swift"; sourceTree = "<group>"; };
+		0B93313220EF02F7007B44DF /* Views.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Views.swift; path = Efficio/Classes/Views.swift; sourceTree = "<group>"; };
 		0B93313320EF02F7007B44DF /* Traits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Traits.swift; path = Efficio/Classes/Traits.swift; sourceTree = "<group>"; };
 		0B93313420EF02F7007B44DF /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Colors.swift; path = Efficio/Classes/Colors.swift; sourceTree = "<group>"; };
+		0B98E26620F04A8A00534C93 /* Actions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Actions.swift; path = Efficio/Classes/Actions.swift; sourceTree = "<group>"; };
 		1D88BF77DD16A20B4EA76978463478D8 /* Pods-Efficio_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Efficio_Tests-resources.sh"; sourceTree = "<group>"; };
 		234B31F094C1A826ED61546106475B3C /* Efficio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Efficio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		314CFCB46075311195B8377BAC76721D /* Efficio-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Efficio-umbrella.h"; sourceTree = "<group>"; };
@@ -90,10 +92,11 @@
 		0FD49B04EAD64FA6149B98B00176DF47 /* Efficio */ = {
 			isa = PBXGroup;
 			children = (
+				0B98E26620F04A8A00534C93 /* Actions.swift */,
 				0B93313420EF02F7007B44DF /* Colors.swift */,
 				0B93313120EF02F7007B44DF /* Error Handling.swift */,
 				0B93313320EF02F7007B44DF /* Traits.swift */,
-				0B93313220EF02F7007B44DF /* View Frames.swift */,
+				0B93313220EF02F7007B44DF /* Views.swift */,
 				5E0F32B5D7F6500057DB054A413E8866 /* Pod */,
 				B01611EBDC1B77FBB2CDFC2CFCEE7312 /* Support Files */,
 			);
@@ -291,7 +294,8 @@
 			files = (
 				043587A47C9600B93D8ACE281E697DC5 /* Efficio-dummy.m in Sources */,
 				0B93313820EF02F8007B44DF /* Colors.swift in Sources */,
-				0B93313620EF02F8007B44DF /* View Frames.swift in Sources */,
+				0B93313620EF02F8007B44DF /* Views.swift in Sources */,
+				0B98E26720F04A8A00534C93 /* Actions.swift in Sources */,
 				0B93313720EF02F8007B44DF /* Traits.swift in Sources */,
 				0B93313520EF02F8007B44DF /* Error Handling.swift in Sources */,
 			);
@@ -325,7 +329,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Efficio/Efficio-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Efficio/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Efficio/Efficio.modulemap";
 				PRODUCT_MODULE_NAME = Efficio;
@@ -392,7 +396,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Efficio/Efficio-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Efficio/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Efficio/Efficio.modulemap";
 				PRODUCT_MODULE_NAME = Efficio;

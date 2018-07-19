@@ -8,8 +8,6 @@
 import Foundation
 
 extension UILabel {
-	public static var generic: UILabel { return UILabel() }
-	
 	public convenience init(addTo view: UIView?, text TEXT: String, font FONT: UIFont, constrainWidthTo constrainedWidth: CGFloat, numberOfLines NUMBEROFLINES: Int) {
 		if let view = view { self.init(addTo: view) }
 		else { self.init() }
@@ -21,7 +19,7 @@ extension UILabel {
 		sizeToFit()
 	}
 	
-	public func estimateHeightForNumberOfLines(_ numberOfLines: Int, text: String, constrainWidthTo constrainedWidth: CGFloat, font: UIFont) -> CGFloat {
+	public static func estimateHeight(withNumberOfLines numberOfLines: Int, text: String, constrainWidthTo constrainedWidth: CGFloat, font: UIFont) -> CGFloat {
 		let label = UILabel()
 		label.numberOfLines = numberOfLines
 		label.frame.size = CGSize(width: constrainedWidth, height: CGFloat.greatestFiniteMagnitude)
@@ -32,7 +30,7 @@ extension UILabel {
 		return label.frame.height
 	}
 	
-	public func dynamicHeight(for text: String, constrainWidthTo constrainedWidth: CGFloat, font: UIFont) -> CGFloat {
+	public func estimateHeight(text: String, constrainWidthTo constrainedWidth: CGFloat, font: UIFont) -> CGFloat {
 		let size = CGSize(width: constrainedWidth, height: CGFloat.greatestFiniteMagnitude)
 		let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
 		let estimatedFrame = NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: font], context: nil)

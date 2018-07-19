@@ -48,7 +48,7 @@ extension UIView {
 				expectedType = "CGFloat"
 			}
 			
-			Error(for: view, if: { () -> (Bool) in true }, explanation: "Could not set \(trait) because provided value was not of type \(expectedType).")
+			UIView.error(for: view, explanation: "Could not set \(trait) because provided value was not of type \(expectedType).")
 		}
 		
 		for trait in traits {
@@ -60,7 +60,7 @@ extension UIView {
 				
 			case .corners:
 				func error(for value: corners) {
-					Error(for: view, if: { () -> (Bool) in true }, explanation: "Corners could not \(value) because value was less than zero.")
+					UIView.error(for: view, explanation: "Corners could not \(value) because value was less than zero.")
 				}
 				if let value = trait.value as? corners {
 					switch value {
@@ -126,7 +126,7 @@ extension UIView {
 	}
 	public func dropShadow(opacity: Float, x: CGFloat, y: CGFloat, spread: CGFloat) {
 		guard let superview = superview else {
-			Error(for: self, if: { () -> (Bool) in true }, explanation: "Could not resize view because there was no reference to a superview.")
+			UIView.error(for: self, explanation: "Could not resize view because there was no reference to a superview.")
 			return
 		}
 		

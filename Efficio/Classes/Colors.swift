@@ -10,11 +10,11 @@ import UIKit
 
 // UIColor Standard Colors Library
 extension UIColor {
-	public static var whiteF8: UIColor { return UIColor().from(RGB: [248, 248, 248]) }
-	public static var whiteF2: UIColor { return UIColor().from(RGB: [242, 242, 242]) }
-	public static var whiteE: UIColor { return UIColor().from(RGB: [238, 238, 238]) }
-	public static var whiteD: UIColor { return UIColor().from(RGB: [221, 221, 221]) }
-	public static var whiteC: UIColor { return UIColor().from(RGB: [204, 204, 204]) }
+	public static var whiteF8: UIColor { return UIColor.from(RGB: [248, 248, 248]) }
+	public static var whiteF2: UIColor { return UIColor.from(RGB: [242, 242, 242]) }
+	public static var whiteE: UIColor { return UIColor.from(RGB: [238, 238, 238]) }
+	public static var whiteD: UIColor { return UIColor.from(RGB: [221, 221, 221]) }
+	public static var whiteC: UIColor { return UIColor.from(RGB: [204, 204, 204]) }
 }
 
 // UIColor Adjustment Library
@@ -71,7 +71,7 @@ extension UIColor {
 			adjustedValues.append(lightenOrDarken(currentValue))
 		}
 		
-		return UIColor().from(RGB: adjustedValues)
+		return UIColor.from(RGB: adjustedValues)
 	}
 }
 
@@ -82,17 +82,17 @@ extension UIColor {
 		static var maxValue: CGFloat = 255
 	}
 	
-	public func from(RGB values: [CGFloat]) -> UIColor {
+	public static func from(RGB values: [CGFloat]) -> UIColor {
 		func checkForErrorsInRGBComponents() {
 			for value in values {
-				Error(for: value, if: { () -> (Bool) in
+				error(when: { () -> (Bool) in
 					(value < RGBColor.minValue) || (value > RGBColor.maxValue)
-				}, explanation: "Value is out of the RGB range.")
+				}, for: value, explanation: "Value is out of the RGB range.")
 			}
 			
-			Error(for: values, if: { () -> (Bool) in
+			error(when: { () -> (Bool) in
 				values.count > 3
-			}, explanation: "More than 3 values when initializing. Only first three values will be used.")
+			}, for: values, explanation: "More than 3 values when initializing. Only first three values will be used.")
 		}
 		
 		func RGB(toUIColor values: [CGFloat]) -> [CGFloat] {

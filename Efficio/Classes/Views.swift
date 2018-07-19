@@ -16,9 +16,9 @@ extension UIView {
 			frame.origin = rect.origin
 			frame.size = rect.size
 		} else {
-			Error(for: self, if: { () -> (Bool) in
+			UIView.error(when: { () -> (Bool) in
 				true
-			}, explanation: "Could not match view's frame because the input view was not of type UIView or CGRect.")
+			}, for: self, explanation: "Could not match view's frame because the input view was not of type UIView or CGRect.")
 		}
 		updateShadowFrame()
 	}
@@ -69,7 +69,7 @@ extension UIView {
 	}
 	
 	private func translator(x: Any?, y: Any?, considersSafeAreaFrom view: UIView?) {
-		guard let superview = superview else { Error(for: self, if: { () -> (Bool) in true }, explanation: "Could not move view because there is no reference to a superview."); return }
+		guard let superview = superview else { UIView.error(for: self, explanation: "Could not move view because there is no reference to a superview."); return }
 		
 		func translate(_ point: Any) -> CGFloat {
 			if let point = point as? origins {
@@ -124,7 +124,7 @@ extension UIView {
 			else if let point = point as? Int { return CGFloat(point) }
 			
 			else {
-				Error(for: self, if: { () -> (Bool) in true }, explanation: "Could not move view to expected point because one or more of the parameters were not of type UIView.origins, CGFloat, Double, or Int.")
+				UIView.error(for: self, explanation: "Could not move view to expected point because one or more of the parameters were not of type UIView.origins, CGFloat, Double, or Int.")
 				return 0
 			}
 		}
@@ -186,6 +186,7 @@ extension CGSize {
 }
 
 extension UIView {
+	
 	public func resize(width: Any?, height: Any?) {
 		resizer(width: width, height: height, considersSafeAreaFrom: nil)
 	}
@@ -200,7 +201,7 @@ extension UIView {
 	}
 	
 	private func resizer(width: Any?, height: Any?, considersSafeAreaFrom view: UIView?) {
-		guard let superview = superview else { Error(for: self, if: { () -> (Bool) in true }, explanation: "Could not resize view because there was no reference to a superview."); return }
+		guard let superview = superview else { UIView.error(for: self, explanation: "Could not resize view because there was no reference to a superview."); return }
 		
 		func transform(_ length: Any) -> CGFloat {
 			if let length = length as? boundingAreas {
@@ -235,7 +236,7 @@ extension UIView {
 			else if let length = length as? Int { return CGFloat(length) }
 			
 			else {
-				Error(for: self, if: { () -> (Bool) in true }, explanation: "Could not resize view to expected size because one or more of the parameters were not of type UIView.boundingAreas, CGFloat, Double, or Int.")
+				UIView.error(for: self, explanation: "Could not resize view to expected size because one or more of the parameters were not of type UIView.boundingAreas, CGFloat, Double, or Int.")
 				return 0
 			}
 		}
@@ -273,7 +274,24 @@ extension UIView {
 		paddingInsets = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
 	}
 	
+	public func boundingArea(_ length: boundingAreas) -> CGFloat {
+		switch length {
+		case .width:
+			return frame.width
+		case .widthMinusPadding:
+			var padding: CGFloat = 0
+			if let paddingInsets = paddingInsets { padding += paddingInsets.left + paddingInsets.right }
+			return frame.width - padding
+		case .height:
+			return frame.height
+		case .heightMinusPadding:
+			var padding: CGFloat = 0
+			if let paddingInsets = paddingInsets { padding += paddingInsets.left + paddingInsets.right }
+			return frame.height - padding
+		}
+	}
+	
 	private func printErrorForPadding() {
-		Error(for: self, if: { () -> (Bool) in true }, explanation: "Could not resize view to expected size because the referenced superview did not have any set padding insets.")
+		UIView.error(for: self, explanation: "Could not resize view to expected size because the referenced superview did not have any set padding insets.")
 	}
 }

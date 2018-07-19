@@ -9,6 +9,18 @@ import Foundation
 
 extension UILabel {
 	public static var generic: UILabel { return UILabel() }
+	
+	public convenience init(addTo view: UIView?, text TEXT: String, font FONT: UIFont, constrainWidthTo constrainedWidth: CGFloat, numberOfLines NUMBEROFLINES: Int) {
+		if let view = view { self.init(addTo: view) }
+		else { self.init() }
+		font = FONT
+		text = TEXT
+		numberOfLines = NUMBEROFLINES
+		lineBreakMode = .byTruncatingTail
+		resize(width: constrainedWidth, height: CGFloat.greatestFiniteMagnitude)
+		sizeToFit()
+	}
+	
 	public func estimateHeightForNumberOfLines(_ numberOfLines: Int, text: String, constrainWidthTo constrainedWidth: CGFloat, font: UIFont) -> CGFloat {
 		let label = UILabel()
 		label.numberOfLines = numberOfLines

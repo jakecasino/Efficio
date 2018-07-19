@@ -27,7 +27,7 @@ extension UIView {
 	}
 	
 	public func style(_ view: UIView,_ traits: [Traits: Any]) {
-		func error(for TRAIT: Traits) {
+		func errorFor(_ TRAIT: Traits) {
 			let trait: String
 			let expectedType: String
 			
@@ -48,19 +48,19 @@ extension UIView {
 				expectedType = "CGFloat"
 			}
 			
-			UIView.error(for: view, explanation: "Could not set \(trait) because provided value was not of type \(expectedType).")
+			error.regarding(view, explanation: "Could not set \(trait) because provided value was not of type \(expectedType).")
 		}
 		
 		for trait in traits {
 			switch trait.key {
 				
 			case .backgroundColor:
-				guard let color = (trait.value as? UIColor) else { error(for: trait.key); break }
+				guard let color = (trait.value as? UIColor) else { errorFor(trait.key); break }
 				view.backgroundColor = color
 				
 			case .corners:
-				func error(for value: corners) {
-					UIView.error(for: view, explanation: "Corners could not \(value) because value was less than zero.")
+				func errorFor(_ value: corners) {
+					error.regarding(view, explanation: "Corners could not \(value) because value was less than zero.")
 				}
 				if let value = trait.value as? corners {
 					switch value {
@@ -80,11 +80,11 @@ extension UIView {
 						view.layer.cornerRadius = 18
 						break
 					case .roundByWidth:
-						guard view.frame.width > 0 else { error(for: value); break }
+						guard view.frame.width > 0 else { errorFor(value); break }
 						view.layer.cornerRadius = (view.bounds.width / 2)
 						break
 					case .roundByHeight:
-						guard view.frame.height > 0 else { error(for: value); break }
+						guard view.frame.height > 0 else { errorFor(value); break }
 						view.layer.cornerRadius = (view.bounds.height / 2)
 						break
 					}
@@ -93,14 +93,14 @@ extension UIView {
 				else if let value = trait.value as? CGFloat { view.layer.cornerRadius = value }
 				else if let value = trait.value as? Double { view.layer.cornerRadius = CGFloat(value) }
 				else if let value = trait.value as? Int { view.layer.cornerRadius = CGFloat(value) }
-				else { error(for: trait.key) }
+				else { errorFor(trait.key) }
 				
 			case .maskContent:
-				guard let value = (trait.value as? Bool) else { error(for: trait.key); break }
+				guard let value = (trait.value as? Bool) else { errorFor(trait.key); break }
 				view.layer.masksToBounds = value
 				
 			case .opacity:
-				guard let value = (trait.value as? Double) else { error(for: trait.key); break }
+				guard let value = (trait.value as? Double) else { errorFor(trait.key); break }
 				view.alpha = CGFloat(value)
 			}
 		}
@@ -126,7 +126,7 @@ extension UIView {
 	}
 	public func dropShadow(opacity: Float, x: CGFloat, y: CGFloat, spread: CGFloat) {
 		guard let superview = superview else {
-			UIView.error(for: self, explanation: "Could not resize view because there was no reference to a superview.")
+			error.regarding(self, explanation: "Could not resize view because there was no reference to a superview.")
 			return
 		}
 		

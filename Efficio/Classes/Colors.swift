@@ -85,14 +85,14 @@ extension UIColor {
 	public static func from(RGB values: [CGFloat]) -> UIColor {
 		func checkForErrorsInRGBComponents() {
 			for value in values {
-				error(when: { () -> (Bool) in
+				error.regarding(value, when: { () -> (Bool) in
 					(value < RGBColor.minValue) || (value > RGBColor.maxValue)
-				}, for: value, explanation: "Value is out of the RGB range.")
+				}, explanation: "Value is out of the RGB range.")
 			}
 			
-			error(when: { () -> (Bool) in
+			error.regarding(values, when: { () -> (Bool) in
 				values.count > 3
-			}, for: values, explanation: "More than 3 values when initializing. Only first three values will be used.")
+			}, explanation: "More than 3 values when initializing. Only first three values will be used.")
 		}
 		
 		func RGB(toUIColor values: [CGFloat]) -> [CGFloat] {

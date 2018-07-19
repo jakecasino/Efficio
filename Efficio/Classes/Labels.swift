@@ -30,7 +30,7 @@ extension UILabel {
 		return label.frame.height
 	}
 	
-	public func estimateHeight(text: String, constrainWidthTo constrainedWidth: CGFloat, font: UIFont) -> CGFloat {
+	public static func estimateHeight(text: String, constrainWidthTo constrainedWidth: CGFloat, font: UIFont) -> CGFloat {
 		let size = CGSize(width: constrainedWidth, height: CGFloat.greatestFiniteMagnitude)
 		let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
 		let estimatedFrame = NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: font], context: nil)

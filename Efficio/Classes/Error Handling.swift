@@ -6,7 +6,7 @@
 //  Copyright © 2018 Jake Casino. All rights reserved.
 //
 
-public class error {
+public struct error {
 	public static func regarding(_ item: Any, explanation: String) {
 		error.regarding(item, when: { () -> (Bool) in
 			true

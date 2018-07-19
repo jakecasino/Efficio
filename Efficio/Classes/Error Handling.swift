@@ -18,4 +18,8 @@ public struct error {
 			print("ERROR regarding \(Unmanaged.passUnretained(item as AnyObject).toOpaque()) of type '\(type(of: item))' [\(explanation)]")
 		}
 	}
+	
+	public static func thereWasNoSuperview(for view: UIView) {
+		error.regarding(view, explanation: "There was no referenced superview for this UIView.")
+	}
 }

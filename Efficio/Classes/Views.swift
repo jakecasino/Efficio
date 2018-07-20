@@ -200,6 +200,7 @@ extension UIView {
 		if let height = height { HEIGHT += height }
 		
 		resize(width: frame.width + WIDTH, height: frame.height + HEIGHT)
+		updateShadowFrame()
 	}
 	
 	public func resize(toFit view: UIView) {

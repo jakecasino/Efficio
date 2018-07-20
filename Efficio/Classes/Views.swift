@@ -193,6 +193,10 @@ extension UIView {
 		resizer(width: width, height: height, considersSafeAreaFrom: view)
 	}
 	
+	public func resize(addToWidth width: CGFloat, addToHeight height: CGFloat) {
+		resize(width: frame.width + width, height: frame.height + height)
+	}
+	
 	public func resize(toFit view: UIView) {
 		frame.size = view.frame.size
 		updateShadowFrame()

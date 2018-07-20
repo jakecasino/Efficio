@@ -193,8 +193,13 @@ extension UIView {
 		resizer(width: width, height: height, considersSafeAreaFrom: view)
 	}
 	
-	public func resize(addToWidth width: CGFloat, addToHeight height: CGFloat) {
-		resize(width: frame.width + width, height: frame.height + height)
+	public func resize(addToWidth width: CGFloat?, addToHeight height: CGFloat?) {
+		var WIDTH: CGFloat = 0
+		var HEIGHT: CGFloat = 0
+		if let width = width { WIDTH += width }
+		if let height = height { HEIGHT += height }
+		
+		resize(width: frame.width + WIDTH, height: frame.height + HEIGHT)
 	}
 	
 	public func resize(toFit view: UIView) {

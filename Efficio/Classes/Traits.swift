@@ -124,13 +124,13 @@ extension UIView {
 			objc_setAssociatedObject(self, &UIView.associationKey_shadow, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
 		}
 	}
-	public func dropShadow(opacity: Float, x: CGFloat, y: CGFloat, spread: CGFloat) {
+	public func dropShadow(opacity: Float, x: CGFloat, y: CGFloat, blur: CGFloat, spread: CGFloat) {
 		guard let superview = superview else {
 			error.regarding(self, explanation: "Could not resize view because there was no reference to a superview.")
 			return
 		}
 		
-		shadow = Shadow(linkTo: self, addTo: superview, opacity: opacity, x: x, y: y, spread: spread)
+		shadow = Shadow(linkTo: self, addTo: superview, opacity: opacity, x: x, y: y, blur: blur, spread: spread)
 		shadow!.layer.cornerRadius = layer.cornerRadius
 	}
 	
@@ -139,16 +139,22 @@ extension UIView {
 	}
 	
 	private class Shadow: UIView {
-		fileprivate convenience init(linkTo linkedView: UIView, addTo superview: UIView, opacity: Float, x: CGFloat, y: CGFloat, spread: CGFloat) {
+		fileprivate convenience init(linkTo linkedView: UIView, addTo superview: UIView, opacity: Float, x: CGFloat, y: CGFloat, blur: CGFloat, spread: CGFloat) {
 			self.init(frame: CGRect.zero)
 			superview.insertSubview(self, belowSubview: linkedView)
 			matchFrame(to: linkedView)
 			
 			style(self, [.backgroundColor: UIColor.white, .maskContent: false])
 			layer.shadowColor = UIColor.black.cgColor
-			layer.shadowRadius = spread
+			layer.shadowRadius = blur / 2
 			layer.shadowOffset = CGSize(width: x, height: y)
 			layer.shadowOpacity = opacity
+			if spread == 0 { layer.shadowPath = nil }
+			else {
+				let dx = -spread
+				let rect = bounds.insetBy(dx: dx, dy: dx)
+				layer.shadowPath = UIBezierPath(rect: rect).cgPath
+			}
 		}
 	}
 }

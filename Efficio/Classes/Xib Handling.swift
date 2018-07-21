@@ -11,5 +11,7 @@ extension UIView {
 	public func loadXib(named name: String, view: UIView) {
 		Bundle.main.loadNibNamed(name, owner: self, options: nil)
 		addSubview(view)
+		view.frame = bounds
+		view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 	}
 }

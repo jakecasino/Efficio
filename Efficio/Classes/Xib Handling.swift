@@ -8,10 +8,14 @@
 import UIKit
 
 extension UIView {
-	public func loadXib(named name: String, view: UIView) {
+	public func loadXib(named name: String) {
 		Bundle.main.loadNibNamed(name, owner: self, options: nil)
-		addSubview(view)
-		view.frame = bounds
+	}
+	
+	public func setupXibView(_ view: UIView, inContainer container: UIView) {
 		view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		view.translatesAutoresizingMaskIntoConstraints = true
+		view.matchFrame(to: container.bounds)
+		addSubview(view)
 	}
 }

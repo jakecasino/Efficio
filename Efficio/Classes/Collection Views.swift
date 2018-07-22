@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol UINestedCollectionView {
+public protocol UINestedCollectionView {
 	var collectionView: UICollectionView! { get set }
 }
 

@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol UINestedCollectionView {
+	var collectionView: UICollectionView! { get set }
+}
+
 extension UICollectionView {
 	public convenience init(addTo view: UIView, sectionInset: UIEdgeInsets) {
 		let layout = UICollectionViewFlowLayout()

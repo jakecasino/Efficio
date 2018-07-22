@@ -24,6 +24,8 @@ extension UIView {
 		case corners
 		case maskContent
 		case opacity
+		case borderColor
+		case borderWidth
 	}
 	
 	public func style(_ view: UIView,_ traits: [Traits: Any]) {
@@ -45,6 +47,12 @@ extension UIView {
 				expectedType = "Bool"
 			case .opacity:
 				trait = "opacity"
+				expectedType = "CGFloat"
+			case .borderColor:
+				trait = "border color"
+				expectedType = "UIColor"
+			case .borderWidth:
+				trait = "border width"
 				expectedType = "CGFloat"
 			}
 			
@@ -77,7 +85,7 @@ extension UIView {
 						view.layer.cornerRadius = 12
 						break
 					case .extraLarge:
-						view.layer.cornerRadius = 18
+						view.layer.cornerRadius = 16
 						break
 					case .roundByWidth:
 						guard view.frame.width > 0 else { errorFor(value); break }
@@ -102,6 +110,14 @@ extension UIView {
 			case .opacity:
 				guard let value = (trait.value as? Double) else { errorFor(trait.key); break }
 				view.alpha = CGFloat(value)
+				
+			case .borderColor:
+				guard let value = (trait.value as? UIColor) else { errorFor(trait.key); break }
+				view.layer.borderColor = value.cgColor
+			
+			case .borderWidth:
+				guard let value = (trait.value as? Double) else { errorFor(trait.key); break }
+				view.layer.borderWidth = CGFloat(value)
 			}
 		}
 	}

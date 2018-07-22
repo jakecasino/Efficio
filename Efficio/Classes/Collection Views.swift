@@ -8,6 +8,18 @@
 
 import Foundation
 
+extension UICollectionView {
+	public convenience init(addTo view: UIView, sectionInset: UIEdgeInsets) {
+		let layout = UICollectionViewFlowLayout()
+		layout.sectionInset = sectionInset
+		
+		self.init(frame: .zero, collectionViewLayout: layout)
+		view.addSubview(self)
+		dataSource = view as? UICollectionViewDataSource
+		delegate = view as? UICollectionViewDelegateFlowLayout
+	}
+}
+
 extension UICollectionViewFlowLayout {
 	public func addPadding(allAround value: CGFloat) {
 		sectionInset = UIEdgeInsets(top: value, left: value, bottom: value, right: value)

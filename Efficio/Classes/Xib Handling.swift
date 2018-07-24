@@ -17,5 +17,6 @@ extension UIView {
 		view.translatesAutoresizingMaskIntoConstraints = true
 		view.matchFrame(to: container.bounds)
 		addSubview(view)
+		clipsToBounds = true
 	}
 }

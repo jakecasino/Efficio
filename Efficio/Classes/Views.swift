@@ -61,6 +61,17 @@ extension UIView {
 		translator(x: x, y: y, considersSafeAreaFrom: view)
 	}
 	
+	public func move(addToX x: CGFloat?, addToY y: CGFloat?) {
+		// translator(x: x, y: y, considersSafeAreaFrom: nil)
+		var X: CGFloat = 0
+		var Y: CGFloat = 0
+		if let x = x { X += x }
+		if let y = y { Y += y }
+		
+		move(x: frame.origin.x + X, y: frame.origin.y + Y)
+		updateShadowFrame()
+	}
+	
 	public func move(toMatch view: UIView) {
 		frame.origin = view.frame.origin
 		updateShadowFrame()

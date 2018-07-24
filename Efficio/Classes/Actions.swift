@@ -38,7 +38,7 @@ extension UIButton {
 	private static var associationKey_baseColor: UInt8 = 0
 	private static var associationKey_accentColor: UInt8 = 1
 	
-	public var baseColor: UIColor {
+	@IBInspectable public var baseColor: UIColor {
 		get {
 			return objc_getAssociatedObject(self, &UIButton.associationKey_baseColor) as! UIColor
 		}
@@ -47,7 +47,7 @@ extension UIButton {
 		}
 	}
 	
-	public var accentColor: UIColor {
+	@IBInspectable public var accentColor: UIColor {
 		get {
 			return objc_getAssociatedObject(self, &UIButton.associationKey_accentColor) as! UIColor
 		}

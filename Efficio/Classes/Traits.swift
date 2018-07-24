@@ -26,6 +26,7 @@ extension UIView {
 		case opacity
 		case borderColor
 		case borderWidth
+		case glyphEdgeInsets
 	}
 	
 	public func style(_ view: UIView,_ traits: [Traits: Any]) {
@@ -45,15 +46,23 @@ extension UIView {
 			case .maskContent:
 				trait = "mask"
 				expectedType = "Bool"
+				break
 			case .opacity:
 				trait = "opacity"
 				expectedType = "CGFloat"
+				break
 			case .borderColor:
 				trait = "border color"
 				expectedType = "UIColor"
+				break
 			case .borderWidth:
 				trait = "border width"
 				expectedType = "CGFloat"
+				break
+			case .glyphEdgeInsets:
+				trait = "glyph edge insets"
+				expectedType = "UIEdgeInsets"
+				break
 			}
 			
 			error.regarding(view, explanation: "Could not set \(trait) because provided value was not of type \(expectedType).")
@@ -118,6 +127,11 @@ extension UIView {
 			case .borderWidth:
 				guard let value = (trait.value as? Double) else { errorFor(trait.key); break }
 				view.layer.borderWidth = CGFloat(value)
+				
+			case .glyphEdgeInsets:
+				guard let action = (view as? UIAction) else { error.regarding(view, explanation: "Could not set glyph edge insets because view was not a UIAction."); break }
+				guard let value = (trait.value as? UIEdgeInsets) else { errorFor(trait.key); break }
+				action.imageEdgeInsets = value
 			}
 		}
 	}

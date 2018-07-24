@@ -150,7 +150,7 @@ extension UIView {
 		shadow!.layer.cornerRadius = layer.cornerRadius
 	}
 	
-	func updateShadowFrame() {
+	public func updateShadowFrame() {
 		if let shadow = shadow { shadow.matchFrame(to: self) }
 	}
 	

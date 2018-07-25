@@ -61,7 +61,7 @@ extension UIView {
 				break
 			case .glyphEdgeInsets:
 				trait = "glyph edge insets"
-				expectedType = "UIEdgeInsets"
+				expectedType = "Double"
 				break
 			}
 			
@@ -130,8 +130,15 @@ extension UIView {
 				
 			case .glyphEdgeInsets:
 				guard let action = (view as? UIAction) else { error.regarding(view, explanation: "Could not set glyph edge insets because view was not a UIAction."); break }
-				guard let value = (trait.value as? UIEdgeInsets) else { errorFor(trait.key); break }
-				action.imageEdgeInsets = value
+				if let value = (trait.value as? CGFloat) {
+					action.imageEdgeInsets = UIEdgeInsets(top: value, left: value, bottom: value, right: value)
+				} else if let value = (trait.value as? Double) {
+					let value_asCGFloat = CGFloat(value)
+					action.imageEdgeInsets = UIEdgeInsets(top: value_asCGFloat, left: value_asCGFloat, bottom: value_asCGFloat, right: value_asCGFloat)
+				} else if let value = (trait.value as? Int) {
+					let value_asCGFloat = CGFloat(value)
+					action.imageEdgeInsets = UIEdgeInsets(top: value_asCGFloat, left: value_asCGFloat, bottom: value_asCGFloat, right: value_asCGFloat)
+				} else { errorFor(trait.key) }
 			}
 		}
 	}

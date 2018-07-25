@@ -12,6 +12,10 @@ extension UIView {
 		Bundle.main.loadNibNamed(name, owner: self, options: nil)
 	}
 	
+	public func loadXib(inBundle bundle: Bundle, named name: String) {
+		bundle.loadNibNamed(name, owner: self, options: nil)
+	}
+	
 	public func setupXibView(_ view: UIView, inContainer container: UIView) {
 		view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		view.translatesAutoresizingMaskIntoConstraints = true

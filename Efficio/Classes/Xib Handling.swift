@@ -12,7 +12,8 @@ extension UIView {
 		Bundle.main.loadNibNamed(name, owner: self, options: nil)
 	}
 	
-	public func loadXib(inBundle bundle: Bundle, named name: String) {
+	public func loadXib(forClass anyClass: AnyClass, named name: String) {
+		let bundle = Bundle(for: anyClass)
 		bundle.loadNibNamed(name, owner: self, options: nil)
 	}
 	

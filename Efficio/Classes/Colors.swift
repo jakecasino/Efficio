@@ -91,7 +91,7 @@ extension UIColor {
 			
 			error.regarding(values, when: { () -> (Bool) in
 				values.count > 3
-			}, explanation: "More than 3 values when initializing. Only first three values will be used.")
+			}, explanation: "More than 3 RGB values were specified. Only first three values will be used.")
 		}
 		
 		func RGB(toUIColor values: [CGFloat]) -> [CGFloat] {

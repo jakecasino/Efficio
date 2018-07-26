@@ -23,7 +23,7 @@ A framework that condenses and consolidates common tasks for iOS Development.
   s.ios.deployment_target = '9.0'
 
   s.source_files = 'Efficio/Classes/**/*'
-  s.swift_version = '4.0'
+  s.swift_version = '4.1'
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'UIKit'

@@ -6,8 +6,6 @@
 //  Copyright © 2018 Jake Casino. All rights reserved.
 //
 
-import UIKit
-
 // UIColor Standard Colors Library
 extension UIColor {
 	public static var whiteF8: UIColor { return UIColor.from(RGB: [248, 248, 248]) }

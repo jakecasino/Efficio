@@ -6,8 +6,6 @@
 //  Copyright © 2018 Jake Casino. All rights reserved.
 //
 
-import UIKit
-
 open class UIAction: UIButton {
 	open override var isHighlighted: Bool {
 		didSet {

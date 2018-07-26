@@ -5,8 +5,6 @@
 //  Created by Jake Casino on 7/7/18.
 //
 
-import Foundation
-
 extension UILabel {
 	public convenience init(addTo view: UIView?, text TEXT: String, font FONT: UIFont, constrainWidthTo constrainedWidth: CGFloat, numberOfLines NUMBEROFLINES: Int) {
 		if let view = view { self.init(addTo: view) }

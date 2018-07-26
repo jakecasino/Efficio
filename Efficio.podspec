@@ -24,10 +24,6 @@ A framework that condenses and consolidates common tasks for iOS Development.
 
   s.source_files = 'Efficio/Classes/**/*'
   s.swift_version = '4.0'
-  
-  # s.resource_bundles = {
-  #   'Efficio' => ['Efficio/Assets/*.png']
-  # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'UIKit'

@@ -161,6 +161,7 @@ extension UIView {
 			objc_setAssociatedObject(self, &UIView.associationKey_shadow, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
 		}
 	}
+	
 	public func dropShadow(opacity: Float, x: CGFloat, y: CGFloat, blur: CGFloat, spread: CGFloat) {
 		guard let superview = superview else {
 			error.regarding(self, explanation: "Could not resize view because there was no reference to a superview.")
@@ -173,6 +174,12 @@ extension UIView {
 	
 	public func updateShadowFrame() {
 		if let shadow = shadow { shadow.matchFrame(to: self) }
+	}
+	
+	public func removeDropShadow() {
+		guard let shadow = shadow else { return }
+		shadow.removeFromSuperview()
+		self.shadow = nil
 	}
 	
 	private class Shadow: UIView {

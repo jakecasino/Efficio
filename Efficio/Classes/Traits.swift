@@ -19,6 +19,7 @@ public enum corners {
 extension UIView {
 	public enum Traits {
 		case backgroundColor
+		case tintColor
 		case corners
 		case maskContent
 		case opacity
@@ -36,6 +37,10 @@ extension UIView {
 			switch TRAIT {
 			case .backgroundColor:
 				trait = "background color"
+				expectedType = "UIColor"
+				break
+			case .tintColor:
+				trait = "tint color"
 				expectedType = "UIColor"
 				break
 			case .corners:
@@ -80,6 +85,13 @@ extension UIView {
 				
 				guard let action = (view as? UIAction) else { break }
 				action.baseColor = color
+				
+			case .tintColor:
+				guard let action = (view as? UIAction) else { break }
+				guard let color = (trait.value as? UIColor) else { errorFor(trait.key); break }
+				view.tintColor = color
+				action.accentColor = color
+				
 			case .corners:
 				func errorFor(_ value: corners) {
 					error.regarding(view, explanation: "Corners could not \(value) because value was less than zero.")
@@ -111,7 +123,7 @@ extension UIView {
 						break
 					}
 				}
-				
+					
 				else if let value = trait.value as? CGFloat { view.layer.cornerRadius = value }
 				else if let value = trait.value as? Double { view.layer.cornerRadius = CGFloat(value) }
 				else if let value = trait.value as? Int { view.layer.cornerRadius = CGFloat(value) }
@@ -133,7 +145,7 @@ extension UIView {
 			case .borderColor:
 				guard let value = (trait.value as? UIColor) else { errorFor(trait.key); break }
 				view.layer.borderColor = value.cgColor
-			
+				
 			case .borderWidth:
 				guard let value = (trait.value as? Double) else { errorFor(trait.key); break }
 				view.layer.borderWidth = CGFloat(value)

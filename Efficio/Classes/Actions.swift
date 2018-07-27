@@ -106,11 +106,17 @@ open class UIAction: UIButton {
 	}
 	
 	public typealias action = () -> ()
-	public func toggle(inactiveState: action, activeState: action) {
+	public func toggle(inactiveState: action, activeState: action, hasHapticFeedback: Bool) {
 		if isSelected {
+			if #available(iOS 10.0, *) {
+				if hasHapticFeedback { UIImpactFeedbackGenerator(style: .medium).impactOccurred() }
+			}
 			isSelected = false
 			inactiveState()
 		} else {
+			if #available(iOS 10.0, *) {
+				if hasHapticFeedback { UIImpactFeedbackGenerator(style: .light).impactOccurred() }
+			}
 			isSelected = true
 			activeState()
 		}

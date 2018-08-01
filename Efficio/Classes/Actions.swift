@@ -122,3 +122,27 @@ open class UIAction: UIButton {
 		}
 	}
 }
+
+public class UILargeTextButton: UIAction {
+	public static func estimatedHeight(constrainWidthTo width: CGFloat) -> CGFloat { return UILabel.estimateHeight(withNumberOfLines: 1, text: String.someLongGenericText, constrainWidthTo: width, font: UIFont.boldSystemFont(ofSize: 17)) + (padding.medium * 2) }
+	
+	public convenience init(addTo view: UIView, text: String, width: CGFloat, primaryColor: UIColor) {
+		self.init(frame: .zero)
+		view.addSubview(self)
+		
+		resize(width: width, height: UILargeTextButton.estimatedHeight(constrainWidthTo: width))
+		
+		style(self, [.backgroundColor: primaryColor, .tintColor: UIColor.white, .corners: corners.extraLarge])
+		setTitle(text, for: .normal)
+		if let titleLabel = titleLabel { titleLabel.font = UIFont.boldSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .body).pointSize)}
+	}
+	
+	override private init(frame: CGRect) {
+		super.init(frame: frame)
+	}
+	
+	required public init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		style(self, [.corners: corners.extraLarge])
+	}
+}

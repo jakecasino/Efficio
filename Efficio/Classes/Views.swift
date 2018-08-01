@@ -33,6 +33,10 @@ public enum origins {
 	case center
 	case right
 	case rightMinusPadding
+	case totheLeftOf
+	case toTheRightOf
+	case aboveView
+	case belowView
 }
 
 extension UIView {
@@ -73,6 +77,47 @@ extension UIView {
 	public func move(toMatch view: UIView) {
 		frame.origin = view.frame.origin
 		updateShadowFrame()
+	}
+	
+	public func move(x: origins?, _ xView: UIView?, withXPadding xPadding: CGFloat?, y: origins?, _ yView: UIView?, withYPadding yPadding: CGFloat?) {
+		var X: CGFloat = frame.origin.x
+		var Y: CGFloat = frame.origin.y
+		
+		if let x = x {
+			if let xView = xView {
+				X = xView.frame.origin.x
+				switch x {
+				case .totheLeftOf:
+					X -= frame.width
+					if let xPadding = xPadding { X -= xPadding }
+				case .toTheRightOf:
+					X += xView.frame.width
+					if let xPadding = xPadding { X += xPadding }
+				default:
+					error.regarding(self, explanation: "Could not move view as expected because origin parameter for x should only be origins.toTheLeftOf or origins.toTheRightOf.")
+					break
+				}
+			}
+		}
+		
+		if let y = y {
+			if let yView = yView {
+				Y = yView.frame.origin.y
+				switch y {
+				case .aboveView:
+					Y -= frame.height
+					if let yPadding = yPadding { Y -= yPadding }
+				case .belowView:
+					Y += yView.frame.height
+					if let yPadding = yPadding { Y += yPadding }
+				default:
+					error.regarding(self, explanation: "Could not move view as expected because origin parameter for y should only be origins.aboveView or origins.belowView.")
+					break
+				}
+			}
+		}
+		
+		move(x: X, y: Y)
 	}
 	
 	private func translator(x: Any?, y: Any?, considersSafeAreaFrom view: UIView?) {
@@ -131,6 +176,9 @@ extension UIView {
 						} else { printErrorForPadding() }
 					}
 					return superview.bounds.width - bounds.width - padding
+				
+				default:
+					return 0
 				}
 			}
 			
@@ -319,5 +367,27 @@ extension UIView {
 	
 	private func printErrorForPadding() {
 		error.regarding(self, explanation: "Could not resize view to expected size because the referenced superview did not have any set padding insets.")
+	}
+}
+
+extension UIView {
+	public static func updateConstraints(in delegate: UIView, _ performUpdate: () -> ()) {
+		delegate.layoutIfNeeded()
+		performUpdate()
+		delegate.layoutIfNeeded()
+	}
+	
+	public static func updateConstraints(in delegate: UIView, _ performUpdate: () -> (), animatedWithDuration duration: TimeInterval, delay: TimeInterval, usingSpringWithDamping: CGFloat, initialSpringVelocity: CGFloat, options: UIViewAnimationOptions, completion: (() -> ())?) {
+		
+		delegate.layoutIfNeeded()
+		performUpdate()
+		
+		UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: usingSpringWithDamping, initialSpringVelocity: initialSpringVelocity, options: options, animations: {
+			delegate.layoutIfNeeded()
+		}) { (_) in
+			if let completion = completion {
+				completion()
+			}
+		}
 	}
 }

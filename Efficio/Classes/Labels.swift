@@ -24,8 +24,9 @@ extension UILabel {
 	}
 	
 	public static func estimateHeight(withNumberOfLines numberOfLines: Int, text: String, constrainWidthTo constrainedWidth: CGFloat, font: UIFont) -> CGFloat {
-		let label = UILabel()
+		let label = UILabel(frame: .zero)
 		label.numberOfLines = numberOfLines
+		label.font = font
 		label.frame.size = CGSize(width: constrainedWidth, height: CGFloat.greatestFiniteMagnitude)
 		label.lineBreakMode = .byWordWrapping
 		label.text = text

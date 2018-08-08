@@ -6,52 +6,32 @@
 //  Copyright © 2018 Jake Casino. All rights reserved.
 //
 
+
+@IBDesignable
 open class UIAction: UIButton {
-	open override var isHighlighted: Bool {
-		didSet {
-			if isHighlighted {
-				if backgroundColor == UIColor.clear {
-					for view in subviews {
-						view.alpha = 0.6
-					}
-				} else {
-					backgroundColor = baseColor.darken(by: 0.15)
-					tintColor = accentColor.darken(by: 0.15)
-				}
-			} else {
-				if backgroundColor == UIColor.clear {
-					for view in subviews {
-						view.alpha = 1.0
-					}
-				} else {
-					backgroundColor = baseColor
-					tintColor = accentColor
-				}
-			}
-		}
+	@IBInspectable public var accentColor: UIColor = UIColor.black {
+		didSet { tintColor = accentColor }
 	}
 	
-	private static var associationKey_baseColor: UInt8 = 0
-	private static var associationKey_accentColor: UInt8 = 1
-	
-	@IBInspectable public var baseColor: UIColor {
-		get {
-			return objc_getAssociatedObject(self, &UIAction.associationKey_baseColor) as! UIColor
-		}
-		set(newValue) {
-			objc_setAssociatedObject(self, &UIAction.associationKey_baseColor, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
-		}
+	@IBInspectable public var baseColor: UIColor = UIColor.clear {
+		didSet { backgroundColor = baseColor }
 	}
 	
-	@IBInspectable public var accentColor: UIColor {
-		get {
-			return objc_getAssociatedObject(self, &UIAction.associationKey_accentColor) as! UIColor
-		}
-		set(newValue) {
-			objc_setAssociatedObject(self, &UIAction.associationKey_accentColor, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
-		}
+	@IBInspectable public var cornerRadius: CGFloat = 0 {
+		didSet { layer.cornerRadius = cornerRadius }
 	}
 	
+	@IBInspectable public var glyphEdgeInsets: CGFloat = 0 {
+		didSet { style(self, [.glyphEdgeInsets: glyphEdgeInsets]) }
+	}
+	
+	@IBInspectable public var glyphIsAspectFit: Bool = true {
+		didSet { imageView?.contentMode = .scaleAspectFit }
+	}
+}
+
+// Initializers
+extension UIAction {
 	public convenience init(addTo view: UIView, glyph: UIImage?, label: String?, baseColor: UIColor) {
 		if let glyph = glyph {
 			if let label = label {
@@ -104,21 +84,50 @@ open class UIAction: UIButton {
 			setTitle(label, for: .normal)
 		}
 	}
+}
+
+// Functionality
+extension UIAction {
+	open override var isHighlighted: Bool {
+		didSet {
+			if isHighlighted {
+				if backgroundColor == UIColor.clear {
+					for view in subviews {
+						view.alpha = 0.6
+					}
+				} else {
+					backgroundColor = baseColor.darken(by: 0.15)
+					tintColor = accentColor.darken(by: 0.15)
+				}
+			} else {
+				if backgroundColor == UIColor.clear {
+					for view in subviews {
+						view.alpha = 1.0
+					}
+				} else {
+					backgroundColor = baseColor
+					tintColor = accentColor
+				}
+			}
+		}
+	}
 	
 	public typealias action = () -> ()
-	public func toggle(inactiveState: action, activeState: action, hasHapticFeedback: Bool) {
-		if isSelected {
-			if #available(iOS 10.0, *) {
-				if hasHapticFeedback { UIImpactFeedbackGenerator(style: .medium).impactOccurred() }
+	public func toggle(inactiveState: @escaping action, activeState: @escaping action, hasHapticFeedback: Bool) {
+		DispatchQueue.main.async {
+			if self.isSelected {
+				if #available(iOS 10.0, *) {
+					if hasHapticFeedback { UIImpactFeedbackGenerator(style: .medium).impactOccurred() }
+				}
+				self.isSelected = false
+				inactiveState()
+			} else {
+				if #available(iOS 10.0, *) {
+					if hasHapticFeedback { UIImpactFeedbackGenerator(style: .light).impactOccurred() }
+				}
+				self.isSelected = true
+				activeState()
 			}
-			isSelected = false
-			inactiveState()
-		} else {
-			if #available(iOS 10.0, *) {
-				if hasHapticFeedback { UIImpactFeedbackGenerator(style: .light).impactOccurred() }
-			}
-			isSelected = true
-			activeState()
 		}
 	}
 }
@@ -135,14 +144,5 @@ public class UILargeTextButton: UIAction {
 		style(self, [.backgroundColor: primaryColor, .tintColor: UIColor.white, .corners: corners.extraLarge])
 		setTitle(text, for: .normal)
 		if let titleLabel = titleLabel { titleLabel.font = UIFont.boldSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .body).pointSize)}
-	}
-	
-	override private init(frame: CGRect) {
-		super.init(frame: frame)
-	}
-	
-	required public init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-		style(self, [.corners: corners.extraLarge])
 	}
 }

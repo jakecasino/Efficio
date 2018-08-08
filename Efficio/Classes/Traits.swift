@@ -16,6 +16,20 @@ public enum corners {
 	case roundByHeight
 }
 
+@IBDesignable open class UIElement: UIView {
+	@IBInspectable public var cornerRadius: CGFloat = 0 {
+		didSet { layer.cornerRadius = cornerRadius }
+	}
+	
+	@IBInspectable public var borderWidth: CGFloat = 0 {
+		didSet { layer.borderWidth = borderWidth }
+	}
+	
+	@IBInspectable public var borderColor: UIColor = UIColor.clear {
+		didSet { layer.borderColor = borderColor.cgColor }
+	}
+}
+
 extension UIView {
 	public enum Traits {
 		case backgroundColor
